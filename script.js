@@ -35,8 +35,13 @@ const translations = {
 };
 
 function setLanguage(lang = "en") {
-    const t = translations[lang] || translations.en;
-    document.documentElement.lang = lang;
+    const selectedLang = translations[lang] ? lang : "en";
+    const t = translations[selectedLang];
+    document.documentElement.lang = selectedLang;
+    const languageSelect = document.getElementById("language-select");
+    if (languageSelect) {
+        languageSelect.value = selectedLang;
+    }
     document.getElementById("hero-title").textContent = t.heroTitle;
     document.getElementById("hero-subtitle").textContent = t.heroSubtitle;
     document.getElementById("journey-button").textContent = t.journeyButton;
