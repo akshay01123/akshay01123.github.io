@@ -8,42 +8,49 @@
 <body>
 
     <header>
-        <h1>Hi, I'm Akshay 👋</h1>
-        <p>International Sales Professional at a manufactuirng company | IIT Gandhinagar | Language Enthusiast</p>
-        <button onclick="scrollToSection()">My Journey</button>
+        <div class="language-switcher">
+            <label for="language-select">Language</label>
+            <select id="language-select" onchange="setLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+            </select>
+        </div>
+        <h1 id="hero-title">Hi, I'm Akshay 👋</h1>
+        <p id="hero-subtitle">International Sales Professional at a manufactuirng company | IIT Gandhinagar | Language Enthusiast</p>
+        <button id="journey-button" onclick="scrollToSection()">My Journey</button>
     </header>
 
     <section id="journey">
-        <h2>My Journey</h2>
-        <p>
+        <h2 id="journey-title">My Journey</h2>
+        <p id="journey-paragraph-1">
             My journey began with a strong curiosity for learning and growth. 
             I pursued my Masters from IIT Gandhinagar, where I developed analytical thinking and problem-solving skills.
         </p>
 
-        <p>
+        <p id="journey-paragraph-2">
             Today, I work in International Sales, where I combine strategy, communication, and cultural understanding 
             to build global relationships and drive business growth.
         </p>
 
-        <p>
+        <p id="journey-paragraph-3">
             Being fluent in Hindi, English, and Japanese allows me to connect across markets and 
             bridge opportunities between people and ideas.
         </p>
     </section>
 
     <section id="skills">
-        <h2>Core Skills</h2>
+        <h2 id="skills-title">Core Skills</h2>
         <ul>
-            <li>International Sales Strategy</li>
-            <li>Cross-Cultural Communication</li>
-            <li>Japanese Language Proficiency</li>
-            <li>Business Development</li>
-            <li>Web Development (HTML, CSS, JavaScript)</li>
+            <li id="skill-1">International Sales Strategy</li>
+            <li id="skill-2">Cross-Cultural Communication</li>
+            <li id="skill-3">Japanese Language Proficiency</li>
+            <li id="skill-4">Business Development</li>
+            <li id="skill-5">Web Development (HTML, CSS, JavaScript)</li>
         </ul>
     </section>
 
     <footer>
-        <p>© 2026 Akshay | Built with passion 🚀</p>
+        <p id="footer-text">© 2026 Akshay | Built with passion 🚀</p>
     </footer>
 
     <script src="script.js"></script>
