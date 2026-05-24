@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Akshay | My Journey</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -33,34 +34,55 @@
         </div>
     </header>
 
-    <section id="journey">
-        <h2 id="journey-title">My Journey</h2>
-        <p id="journey-paragraph-1">
-            My journey began with a strong curiosity for learning and growth. 
-            I pursued my Masters from IIT Gandhinagar, where I developed analytical thinking and problem-solving skills.
-        </p>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="search">
+                <input id="search-input" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <nav class="categories">
+                <h3>Sections</h3>
+                <ul>
+                    <li><a href="#journey">My Journey</a></li>
+                    <li><a href="#skills">Core Skills</a></li>
+                </ul>
+            </nav>
+            <div class="newsletter">
+                <h4>Subscribe</h4>
+                <p>Get updates (placeholder)</p>
+            </div>
+        </aside>
 
-        <p id="journey-paragraph-2">
-            Today, I work in International Sales, where I combine strategy, communication, and cultural understanding 
-            to build global relationships and drive business growth.
-        </p>
+        <main class="content">
+            <article class="card" id="journey">
+                <h2 id="journey-title">My Journey</h2>
+                <p id="journey-paragraph-1">
+                    My journey began with a strong curiosity for learning and growth. 
+                    I pursued my Masters from IIT Gandhinagar, where I developed analytical thinking and problem-solving skills.
+                </p>
 
-        <p id="journey-paragraph-3">
-            Being fluent in Hindi, English, and Japanese allows me to connect across markets and 
-            bridge opportunities between people and ideas.
-        </p>
-    </section>
+                <p id="journey-paragraph-2">
+                    Today, I work in International Sales, where I combine strategy, communication, and cultural understanding 
+                    to build global relationships and drive business growth.
+                </p>
 
-    <section id="skills">
-        <h2 id="skills-title">Core Skills</h2>
-        <ul>
-            <li id="skill-1">International Sales Strategy</li>
-            <li id="skill-2">Cross-Cultural Communication</li>
-            <li id="skill-3">Japanese Language Proficiency</li>
-            <li id="skill-4">Business Development</li>
-            <li id="skill-5">Web Development (HTML, CSS, JavaScript)</li>
-        </ul>
-    </section>
+                <p id="journey-paragraph-3">
+                    Being fluent in Hindi, English, and Japanese allows me to connect across markets and 
+                    bridge opportunities between people and ideas.
+                </p>
+            </article>
+
+            <article class="card" id="skills">
+                <h2 id="skills-title">Core Skills</h2>
+                <ul class="skills-list">
+                    <li id="skill-1">International Sales Strategy</li>
+                    <li id="skill-2">Cross-Cultural Communication</li>
+                    <li id="skill-3">Japanese Language Proficiency</li>
+                    <li id="skill-4">Business Development</li>
+                    <li id="skill-5">Web Development (HTML, CSS, JavaScript)</li>
+                </ul>
+            </article>
+        </main>
+    </div>
 
     <footer>
         <p id="footer-text">© 2026 Akshay | Built with passion 🚀</p>
