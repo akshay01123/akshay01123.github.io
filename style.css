@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Inter, Arial, sans-serif;
     background-color: purple;
     color: #333;
     text-align: center;
@@ -173,4 +173,59 @@ footer {
     padding: 20px;
     background-color: #222;
     color: white;
+}
+
+/* Container layout similar to jlptsensei: sidebar + content */
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    max-width: 1200px;
+    margin: -80px auto 60px; /* lift content visually under hero */
+    padding: 0 20px;
+}
+
+.sidebar {
+    position: relative;
+}
+
+.sidebar .search input[type="search"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.categories h3 {
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.categories ul { list-style: none; padding: 0; margin: 0; }
+.categories li { margin: 8px 0; }
+.categories a { color: rgba(255,255,255,0.95); text-decoration: none; }
+
+.content { display: block; }
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    color: #222;
+    text-align: left;
+}
+
+.card h2 { margin-top: 0; }
+.skills-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0; }
+.skills-list li { background: #fbfbfb; padding: 10px 12px; border-radius: 8px; list-style: none; }
+
+/* Make sidebar visually distinct but keep colors */
+.sidebar, .newsletter { color: white; }
+
+@media (max-width: 980px) {
+    .container { grid-template-columns: 1fr; margin-top: 18px; }
+    .skills-list { grid-template-columns: 1fr; }
 }
