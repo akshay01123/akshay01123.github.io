@@ -101,6 +101,30 @@ header h1 {
     margin-bottom: 14px;
 }
 
+.social-counts {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+}
+
+.social-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.95);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.social-count .sc-value {
+    font-weight: 800;
+    color: white;
+}
+
 .social {
     display: inline-block;
     padding: 8px 12px;

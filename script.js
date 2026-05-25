@@ -74,4 +74,29 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         setLanguage("en");
     }
+
+    // --- Social follower counts (editable values) ---
+    // NOTE: Direct API access to Instagram/LinkedIn follower counts requires auth and API access.
+    // To keep this simple and offline-friendly, set the follower numbers here. Update values as needed.
+    const SOCIAL_COUNTS = {
+        instagram: null, // e.g. 1234. Use null to show placeholder
+        linkedin: null
+    };
+
+    function formatNumber(n) {
+        if (n === null || n === undefined) return '—';
+        if (n < 1000) return String(n);
+        if (n < 1000000) return (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'K';
+        return (n / 1000000).toFixed(n % 1000000 === 0 ? 0 : 1) + 'M';
+    }
+
+    const igCountEl = document.getElementById('instagram-count');
+    const liCountEl = document.getElementById('linkedin-count');
+    if (igCountEl) igCountEl.textContent = formatNumber(SOCIAL_COUNTS.instagram);
+    if (liCountEl) liCountEl.textContent = formatNumber(SOCIAL_COUNTS.linkedin);
+
+    // Ensure Instagram link shows the handle (in case it's changed later)
+    const igLink = document.getElementById('instagram-link');
+    if (igLink) igLink.textContent = '@akshay0112';
+    // LinkedIn link label left as 'LinkedIn' — could be adjusted to a name if desired.
 });
