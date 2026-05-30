@@ -1,3 +1,74 @@
+// --- Chatbot logic ---
+document.addEventListener("DOMContentLoaded", () => {
+    const chatbotForm = document.getElementById('chatbot-form');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+
+    // Profile knowledge base
+    const profileData = {
+        name: "Akshay Srivastava",
+        location: "Fukuoka, Japan",
+        education: [
+            "M.Tech, Materials Science and Engineering, IIT Gandhinagar (2018-2020)",
+            "B.Tech, Production Engineering, Govind Ballabh Pant Engineering College (2014-2018)",
+            "Summer School, Advanced Functional Materials, Shanghai Jiao Tong University (2020)"
+        ],
+        languages: ["English (Full Professional)", "Japanese (Full Professional)", "Hindi (Native)"] ,
+        skills: ["Statistics", "Machine Learning", "SQL", "International Sales", "Cross-Cultural Communication", "Japanese Language Proficiency", "Business Development", "Web Development (HTML, CSS, JavaScript)", "Data Analysis"],
+        experience: [
+            { role: "International Department", company: "KUKEN KOGYO CO., LTD.", location: "Fukuoka, Japan", dates: "Apr 2024 – Present", desc: "Analyzed technical and operational data for overseas cooling tower projects. Acted as bridge between customers and production teams." },
+            { role: "Technical Department", company: "KUKEN KOGYO CO., LTD.", location: "Fukuoka, Japan", dates: "Apr 2022 – Mar 2024", desc: "Component design and production processes, ensuring accuracy and consistency." },
+            { role: "Technical Analyst (Remote)", company: "", location: "Ahmedabad, India", dates: "May 2021 – Mar 2022", desc: "Structured data analysis and market research for engineering and business decisions." },
+            { role: "Postgraduate Researcher", company: "IIT Gandhinagar", location: "Gandhinagar, India", dates: "Aug 2020 – Apr 2021", desc: "Data-driven experiments and statistical analysis for materials research." }
+        ]
+    };
+
+    function botReply(msg) {
+        const div = document.createElement('div');
+        div.className = 'msg bot';
+        div.textContent = msg;
+        chatbotMessages.appendChild(div);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    function userMsg(msg) {
+        const div = document.createElement('div');
+        div.className = 'msg user';
+        div.textContent = msg;
+        chatbotMessages.appendChild(div);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function answerQuestion(q) {
+        const text = q.toLowerCase();
+        // Simple keyword-based answers
+        if (text.includes('name')) return `My name is ${profileData.name}.`;
+        if (text.includes('location') || text.includes('based')) return `I'm based in ${profileData.location}.`;
+        if (text.includes('education') || text.includes('study') || text.includes('degree')) return `My education: ${profileData.education.join('; ')}`;
+        if (text.includes('language')) return `I speak: ${profileData.languages.join(', ')}`;
+        if (text.includes('skill') || text.includes('expertise')) return `My skills include: ${profileData.skills.join(', ')}`;
+        if (text.includes('experience') || text.includes('work') || text.includes('job') || text.includes('career')) {
+            return 'Here is a summary of my recent work experience:\n' + profileData.experience.map(e => `${e.role} at ${e.company ? e.company + ', ' : ''}${e.location} (${e.dates}): ${e.desc}`).join('\n');
+        }
+        if (text.includes('current') && text.includes('role')) return `I'm currently working in the International Department at KUKEN KOGYO CO., LTD. in Fukuoka, Japan (since Apr 2024).`;
+        if (text.includes('japan')) return `Yes, I have worked and studied in Japan. My current role is in Fukuoka, Japan.`;
+        if (text.includes('contact')) return `You can contact me at akshay.srivastava543@gmail.com or via LinkedIn.`;
+        if (text.includes('linkedin')) return `Here's my LinkedIn: https://www.linkedin.com/in/akshay543/`;
+        if (text.includes('instagram')) return `My Instagram handle is @akshay0112.`;
+        // Default
+        return "I'm a simple profile bot! Try asking about my experience, education, skills, or contact info.";
+    }
+
+    if (chatbotForm && chatbotInput && chatbotMessages) {
+        chatbotForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msg = chatbotInput.value.trim();
+            if (!msg) return;
+            userMsg(msg);
+            setTimeout(() => botReply(answerQuestion(msg)), 400);
+            chatbotInput.value = '';
+        });
+    }
+});
 
 const translations = {
     en: {
