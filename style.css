@@ -1,3 +1,42 @@
+.timeline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 3px solid var(--light-blue);
+}
+.timeline-list li {
+    margin-bottom: 28px;
+    padding-left: 22px;
+    position: relative;
+}
+.timeline-list li:before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 8px;
+    width: 14px;
+    height: 14px;
+    background: var(--light-blue);
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.timeline-date {
+    font-size: 14px;
+    color: var(--dark-blue);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+.timeline-role {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.timeline-desc {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 0;
+}
 
 :root {
     --dark-blue: #0b3d91;
