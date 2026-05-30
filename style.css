@@ -95,29 +95,32 @@ header h1 {
     color: rgba(255,255,255,0.95);
 }
 
-.social-links {
+
+.social-links-with-counts {
     display: flex;
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 24px;
+    margin-bottom: 18px;
 }
 
-.social-counts {
+.social-link-block {
     display: flex;
-    gap: 10px;
-    justify-content: flex-start;
-    margin-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
 }
+
+
 
 .social-count {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
+    gap: 6px;
+    padding: 4px 10px;
     border-radius: 999px;
     background: rgba(255,255,255,0.06);
     color: rgba(255,255,255,0.95);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .social-count .sc-value {
