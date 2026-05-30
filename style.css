@@ -1,3 +1,38 @@
+/* Main navigation styles */
+.main-nav {
+    width: 100%;
+    background: linear-gradient(90deg, var(--dark-blue), var(--light-blue));
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    margin-bottom: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+}
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 0;
+    padding: 0 0 0 0;
+    list-style: none;
+}
+.main-nav li {
+    display: inline-block;
+}
+.main-nav .nav-link {
+    display: block;
+    padding: 18px 28px 14px 28px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: border 0.18s, background 0.18s;
+}
+.main-nav .nav-link:hover, .main-nav .nav-link.active {
+    border-bottom: 3px solid #fff;
+    background: rgba(255,255,255,0.07);
+}
 /* Chatbot styles */
 #chatbot-container {
     background: #f7faff;
