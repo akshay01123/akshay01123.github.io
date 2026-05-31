@@ -1,6 +1,10 @@
-            <!-- Chatbot Section -->
-            <article class="card" id="chatbot-section">
-                <h2>Ask Me (Chatbot)</h2>
+            <!-- Floating Chatbot Button and Side Panel -->
+            <button id="chatbot-fab" title="Chat with me">💬</button>
+            <div id="chatbot-sidepanel" class="chatbot-sidepanel-hidden" aria-modal="true" role="dialog">
+                <div id="chatbot-panel-header">
+                    <span>Ask Me (Chatbot)</span>
+                    <button id="chatbot-close" title="Close">&times;</button>
+                </div>
                 <div id="chatbot-container">
                     <div id="chatbot-messages"></div>
                     <form id="chatbot-form" autocomplete="off">
@@ -8,7 +12,7 @@
                         <button type="submit">Send</button>
                     </form>
                 </div>
-            </article>
+            </div>
 <!DOCTYPE html>
 <html lang="en">
 <head>

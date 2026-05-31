@@ -1,5 +1,32 @@
 // --- Chatbot logic ---
 document.addEventListener("DOMContentLoaded", () => {
+        // --- Chatbot floating button and panel logic ---
+        const chatbotFab = document.getElementById('chatbot-fab');
+        const chatbotPanel = document.getElementById('chatbot-sidepanel');
+        const chatbotClose = document.getElementById('chatbot-close');
+
+        if (chatbotFab && chatbotPanel) {
+            chatbotFab.addEventListener('click', () => {
+                chatbotPanel.classList.remove('chatbot-sidepanel-hidden');
+                setTimeout(() => {
+                    const input = document.getElementById('chatbot-input');
+                    if (input) input.focus();
+                }, 200);
+            });
+        }
+        if (chatbotClose && chatbotPanel) {
+            chatbotClose.addEventListener('click', () => {
+                chatbotPanel.classList.add('chatbot-sidepanel-hidden');
+            });
+        }
+        // Optional: close on outside click
+        document.addEventListener('mousedown', (e) => {
+            if (chatbotPanel && !chatbotPanel.classList.contains('chatbot-sidepanel-hidden')) {
+                if (!chatbotPanel.contains(e.target) && e.target !== chatbotFab) {
+                    chatbotPanel.classList.add('chatbot-sidepanel-hidden');
+                }
+            }
+        });
     const chatbotForm = document.getElementById('chatbot-form');
     const chatbotInput = document.getElementById('chatbot-input');
     const chatbotMessages = document.getElementById('chatbot-messages');
