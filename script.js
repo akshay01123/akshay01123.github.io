@@ -233,8 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // NOTE: Direct API access to Instagram/LinkedIn follower counts requires auth and API access.
     // To keep this simple and offline-friendly, set the follower numbers here. Update values as needed.
     const SOCIAL_COUNTS = {
-        instagram: null, // e.g. 1234. Use null to show placeholder
-        linkedin: null
+        instagram: 1234, // Example: set your real Instagram followers here
+        linkedin: 2345   // Example: set your real LinkedIn followers here
     };
 
     function formatNumber(n) {
