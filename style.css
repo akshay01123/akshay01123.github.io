@@ -1,3 +1,140 @@
+/* Floating Jisho Button and Side Panel */
+#jisho-fab {
+    position: fixed;
+    bottom: 110px;
+    right: 32px;
+    z-index: 1200;
+    background: #2d7a4a;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.7rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+#jisho-fab:hover {
+    background: #4ea8ff;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.22);
+}
+
+#jisho-sidepanel {
+    position: fixed;
+    bottom: 110px;
+    right: 32px;
+    width: 340px;
+    max-width: 95vw;
+    height: 370px;
+    background: #1a2233;
+    color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    z-index: 1300;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.jisho-sidepanel-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) scale(0.98);
+}
+#jisho-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px 10px 18px;
+    background: #2d7a4a;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+#jisho-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    cursor: pointer;
+    margin-left: 8px;
+    padding: 0 6px;
+    border-radius: 6px;
+    transition: background 0.15s;
+}
+#jisho-close:hover {
+    background: rgba(255,255,255,0.12);
+}
+#jisho-container {
+    background: transparent;
+    border-radius: 0 0 18px 18px;
+    padding: 12px 14px 10px 14px;
+    box-shadow: none;
+    max-width: 100%;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+#jisho-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+#jisho-input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #b3d4fc;
+    font-size: 15px;
+    background: #fff;
+    color: #1a2233;
+}
+#jisho-form button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    background: #2d7a4a;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#jisho-form button:hover {
+    background: #4ea8ff;
+}
+#jisho-results {
+    flex: 1;
+    overflow-y: auto;
+    background: #232c43;
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: #fff;
+    font-size: 15px;
+}
+#jisho-results .jisho-entry {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #3a4660;
+}
+#jisho-results .jisho-word {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #4ea8ff;
+}
+#jisho-results .jisho-reading {
+    font-size: 0.98em;
+    color: #b3d4fc;
+    margin-left: 8px;
+}
+#jisho-results .jisho-meaning {
+    color: #fff;
+    margin-left: 2px;
+}
 /* Floating Chatbot Button and Side Panel */
 #chatbot-fab {
     position: fixed;

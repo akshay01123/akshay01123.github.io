@@ -1,3 +1,18 @@
+                        <!-- Floating Jisho Button and Side Panel -->
+                        <button id="jisho-fab" title="Japanese Dictionary">📖</button>
+                        <div id="jisho-sidepanel" class="jisho-sidepanel-hidden" aria-modal="true" role="dialog">
+                            <div id="jisho-panel-header">
+                                <span>Jisho Dictionary</span>
+                                <button id="jisho-close" title="Close">&times;</button>
+                            </div>
+                            <div id="jisho-container">
+                                <form id="jisho-form" autocomplete="off">
+                                    <input type="text" id="jisho-input" placeholder="Enter Japanese word..." aria-label="Jisho input" required />
+                                    <button type="submit">Search</button>
+                                </form>
+                                <div id="jisho-results"></div>
+                            </div>
+                        </div>
             <!-- Floating Chatbot Button and Side Panel -->
             <button id="chatbot-fab" title="Chat with me">💬</button>
             <div id="chatbot-sidepanel" class="chatbot-sidepanel-hidden" aria-modal="true" role="dialog">

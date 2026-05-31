@@ -1,3 +1,59 @@
+// --- Jisho floating button and panel logic ---
+document.addEventListener("DOMContentLoaded", () => {
+    const jishoFab = document.getElementById('jisho-fab');
+    const jishoPanel = document.getElementById('jisho-sidepanel');
+    const jishoClose = document.getElementById('jisho-close');
+    const jishoForm = document.getElementById('jisho-form');
+    const jishoInput = document.getElementById('jisho-input');
+    const jishoResults = document.getElementById('jisho-results');
+
+    if (jishoFab && jishoPanel) {
+        jishoFab.addEventListener('click', () => {
+            jishoPanel.classList.remove('jisho-sidepanel-hidden');
+            setTimeout(() => {
+                if (jishoInput) jishoInput.focus();
+            }, 200);
+        });
+    }
+    if (jishoClose && jishoPanel) {
+        jishoClose.addEventListener('click', () => {
+            jishoPanel.classList.add('jisho-sidepanel-hidden');
+        });
+    }
+    document.addEventListener('mousedown', (e) => {
+        if (jishoPanel && !jishoPanel.classList.contains('jisho-sidepanel-hidden')) {
+            if (!jishoPanel.contains(e.target) && e.target !== jishoFab) {
+                jishoPanel.classList.add('jisho-sidepanel-hidden');
+            }
+        }
+    });
+
+    if (jishoForm && jishoInput && jishoResults) {
+        jishoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = jishoInput.value.trim();
+            if (!query) return;
+            jishoResults.innerHTML = '<div>Searching...</div>';
+            fetch(`https://jisho.org/api/v1/search/words?keyword=${encodeURIComponent(query)}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (!data.data || data.data.length === 0) {
+                        jishoResults.innerHTML = '<div>No results found.</div>';
+                        return;
+                    }
+                    jishoResults.innerHTML = data.data.slice(0, 5).map(entry => {
+                        const word = entry.japanese[0]?.word || entry.japanese[0]?.reading || '';
+                        const reading = entry.japanese[0]?.reading ? `<span class="jisho-reading">${entry.japanese[0].reading}</span>` : '';
+                        const meanings = entry.senses[0]?.english_definitions?.join(', ') || '';
+                        return `<div class="jisho-entry"><span class="jisho-word">${word}</span> ${reading}<div class="jisho-meaning">${meanings}</div></div>`;
+                    }).join('');
+                })
+                .catch(() => {
+                    jishoResults.innerHTML = '<div>Error fetching results.</div>';
+                });
+        });
+    }
+});
 // --- Chatbot logic ---
 document.addEventListener("DOMContentLoaded", () => {
         // --- Chatbot floating button and panel logic ---
