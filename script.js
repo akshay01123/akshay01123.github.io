@@ -57,4 +57,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     updateThemeButton();
   }
+
+  const searchForm = document.getElementById('search-form');
+  const searchInput = document.getElementById('site-search');
+  const pageSections = Array.from(document.querySelectorAll('main section'));
+
+  function clearSearchMatches() {
+    pageSections.forEach(section => section.classList.remove('search-match'));
+  }
+
+  if (searchForm && searchInput) {
+    searchForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      clearSearchMatches();
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) return;
+
+      const matches = pageSections.filter(section => section.textContent.toLowerCase().includes(query));
+      if (matches.length > 0) {
+        matches.forEach(section => section.classList.add('search-match'));
+        matches[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      if (!searchInput.value.trim()) {
+        clearSearchMatches();
+      }
+    });
+  }
 });
