@@ -195,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const searchForm = document.getElementById('search-form');
-  const searchInput = document.getElementById('site-search');
   const pageSections = Array.from(document.querySelectorAll('main section'));
 
   function clearSearchMatches() {
