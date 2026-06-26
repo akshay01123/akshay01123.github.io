@@ -14,11 +14,18 @@
       <nav class="main-nav" aria-label="Main navigation">
         <button id="menu-btn" class="menu-btn" aria-expanded="false" aria-controls="nav-list">☰</button>
         <ul id="nav-list" class="nav-list">
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+          <li><a href="#about" data-i18n="nav.about">About</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
+        <div class="language-switcher">
+          <label class="sr-only" for="language-select">Language</label>
+          <select id="language-select" class="language-select" aria-label="Language selector">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+          </select>
+        </div>
         <button id="theme-toggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
       </nav>
     </div>
@@ -34,93 +41,93 @@
   <main>
     <section id="hero" class="hero container">
       <div class="hero-copy">
-        <h1>Hi, I'm Akshay</h1>
-        <p class="lead">I am an International Sales professional with an engineering foundation and a love for simple, user-friendly web design.</p>
-        <p><a class="btn" href="#about">Learn more</a></p>
+        <h1 data-i18n="hero.title">Hi, I'm Akshay</h1>
+        <p class="lead" data-i18n="hero.lead">I am an International Sales professional with an engineering foundation and a love for simple, user-friendly web design.</p>
+        <p><a class="btn" href="#about" data-i18n="hero.learn_more">Learn more</a></p>
       </div>
       <aside class="hero-sidebar">
         <div class="hero-card">
-          <strong>Location</strong>
-          <p>Fukuoka, Japan</p>
+          <strong data-i18n="hero.location_title">Location</strong>
+          <p data-i18n="hero.location_value">Fukuoka, Japan</p>
         </div>
         <div class="hero-card">
-          <strong>Specialties</strong>
-          <p>Sales strategy · B2B communication · Japanese language · Web development</p>
+          <strong data-i18n="hero.specialties_title">Specialties</strong>
+          <p data-i18n="hero.specialties_value">Sales strategy · B2B communication · Japanese language · Web development</p>
         </div>
       </aside>
     </section>
 
     <section id="about" class="container section-section">
-      <h2>About</h2>
-      <p class="section-intro">I combine technical training from IIT Gandhinagar with international sales experience in Japan. My work focuses on building trust across cultures, helping businesses grow, and making complex processes easy to understand.</p>
+      <h2 data-i18n="about.title">About</h2>
+      <p class="section-intro" data-i18n="about.intro">I combine technical training from IIT Gandhinagar with international sales experience in Japan. My work focuses on building trust across cultures, helping businesses grow, and making complex processes easy to understand.</p>
       <div class="detail-grid">
         <div>
-          <h3>Background</h3>
-          <p>Master's in Materials Science and Engineering from IIT Gandhinagar. Experience in overseas project coordination, technical communication, and customer support.</p>
+          <h3 data-i18n="about.background_title">Background</h3>
+          <p data-i18n="about.background_text">Master's in Materials Science and Engineering from IIT Gandhinagar. Experience in overseas project coordination, technical communication, and customer support.</p>
         </div>
         <div>
-          <h3>Approach</h3>
-          <p>I create clear narratives and user-friendly resources, whether I am explaining a product, developing a website, or working with international teams.</p>
+          <h3 data-i18n="about.approach_title">Approach</h3>
+          <p data-i18n="about.approach_text">I create clear narratives and user-friendly resources, whether I am explaining a product, developing a website, or working with international teams.</p>
         </div>
       </div>
     </section>
 
     <section id="experience" class="container section-section">
-      <h2>Experience</h2>
+      <h2 data-i18n="experience.title">Experience</h2>
       <ul class="experience-list">
         <li>
-          <strong>International Department</strong>
-          <span>Apr 2024 – Present · Kuken Kogyo, Fukuoka</span>
-          <p>Coordinated global orders and translated technical requirements for overseas cooling tower projects.</p>
+          <strong data-i18n="experience.item1.title">International Department</strong>
+          <span data-i18n="experience.item1.date">Apr 2024 – Present · Kuken Kogyo, Fukuoka</span>
+          <p data-i18n="experience.item1.text">Coordinated global orders and translated technical requirements for overseas cooling tower projects.</p>
         </li>
         <li>
-          <strong>Technical Department</strong>
-          <span>Apr 2022 – Mar 2024 · Kuken Kogyo, Fukuoka</span>
-          <p>Supported component design, production process consistency, and quality control for industrial products.</p>
+          <strong data-i18n="experience.item2.title">Technical Department</strong>
+          <span data-i18n="experience.item2.date">Apr 2022 – Mar 2024 · Kuken Kogyo, Fukuoka</span>
+          <p data-i18n="experience.item2.text">Supported component design, production process consistency, and quality control for industrial products.</p>
         </li>
         <li>
-          <strong>Postgraduate Researcher</strong>
-          <span>Aug 2020 – Apr 2021 · IIT Gandhinagar</span>
-          <p>Designed experiments and used data analysis to improve material processing and performance.</p>
+          <strong data-i18n="experience.item3.title">Postgraduate Researcher</strong>
+          <span data-i18n="experience.item3.date">Aug 2020 – Apr 2021 · IIT Gandhinagar</span>
+          <p data-i18n="experience.item3.text">Designed experiments and used data analysis to improve material processing and performance.</p>
         </li>
       </ul>
     </section>
 
     <section id="skills" class="container section-section">
-      <h2>Skills</h2>
+      <h2 data-i18n="skills.title">Skills</h2>
       <ul class="skills-list">
-        <li>International sales strategy</li>
-        <li>Cross-cultural communication</li>
-        <li>Japanese language proficiency</li>
-        <li>Web design fundamentals</li>
-        <li>Technical documentation</li>
+        <li data-i18n="skills.list.1">International sales strategy</li>
+        <li data-i18n="skills.list.2">Cross-cultural communication</li>
+        <li data-i18n="skills.list.3">Japanese language proficiency</li>
+        <li data-i18n="skills.list.4">Web design fundamentals</li>
+        <li data-i18n="skills.list.5">Technical documentation</li>
       </ul>
     </section>
 
     <section id="projects" class="container section-section">
-      <h2>Projects</h2>
+      <h2 data-i18n="projects.title">Projects</h2>
       <div class="projects-grid">
         <article class="project-card">
-          <h3>Portfolio Refresh</h3>
-          <p>A clear, responsive personal website to share my story, skills, and contact information.</p>
+          <h3 data-i18n="projects.card1.title">Portfolio Refresh</h3>
+          <p data-i18n="projects.card1.text">A clear, responsive personal website to share my story, skills, and contact information.</p>
         </article>
         <article class="project-card">
-          <h3>Sales Support Toolkit</h3>
-          <p>Documentation and process templates to streamline communication between Japanese technical teams and overseas customers.</p>
+          <h3 data-i18n="projects.card2.title">Sales Support Toolkit</h3>
+          <p data-i18n="projects.card2.text">Documentation and process templates to streamline communication between Japanese technical teams and overseas customers.</p>
         </article>
       </div>
     </section>
 
     <section id="contact" class="container section-section">
-      <h2>Contact</h2>
-      <p>Reach out to discuss collaborations, website work, or international sales opportunities.</p>
+      <h2 data-i18n="contact.title">Contact</h2>
+      <p data-i18n="contact.line1">Reach out to discuss collaborations, website work, or international sales opportunities.</p>
       <p><a href="mailto:akshay.srivastava543@gmail.com">akshay.srivastava543@gmail.com</a></p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Akshay</p>
+      <p data-i18n="footer.copyright">© 2026 Akshay</p>
     </div>
   </footer>
 
