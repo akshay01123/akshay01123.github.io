@@ -370,8 +370,8 @@ body {
 
 .social-icons a {
   display: inline-flex;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -386,8 +386,8 @@ body {
 }
 
 .social-icons svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 @media (max-width: 960px) {
