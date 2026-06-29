@@ -318,6 +318,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       function handleKeydown(event) {
+        // Prevent page scroll when using arrow keys for the game
+        const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+        if (arrowKeys.includes(event.key)) {
+          const active = document.activeElement;
+          const isTyping = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable);
+          if (!isTyping) event.preventDefault();
+        }
+
         if (!isPlaying && event.key === 'r') {
           resetGame();
           return;
