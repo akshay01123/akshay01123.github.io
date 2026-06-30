@@ -222,5 +222,93 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-    // Snake game removed
+  // Chat widget logic
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatPanel = document.getElementById('chat-panel');
+  const chatClose = document.getElementById('chat-close');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+  const chatMessages = document.getElementById('chat-messages');
+
+  const chatSections = Array.from(document.querySelectorAll('main section')).map(section => {
+    const title = section.querySelector('h2')?.textContent?.trim() || section.id;
+    const text = Array.from(section.querySelectorAll('h2, h3, p, li')).map(el => el.textContent.trim()).join(' ');
+    return { id: section.id, title, text };
   });
+
+  function appendChatMessage(text, sender = 'bot') {
+    const wrapper = document.createElement('div');
+    wrapper.className = `chat-message ${sender}`;
+    const message = document.createElement('div');
+    message.className = 'chat-message-text';
+    message.textContent = text;
+    wrapper.appendChild(message);
+    chatMessages.appendChild(wrapper);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function summarizeSection(section) {
+    const short = section.text.replace(/\s+/g, ' ').trim();
+    return short.length > 320 ? `${short.slice(0, 320).trim()}...` : short;
+  }
+
+  function getBestReply(query) {
+    const normalized = query.toLowerCase();
+    if (/about|background|profile|story|approach/.test(normalized)) {
+      const section = chatSections.find(item => item.id === 'about');
+      return section ? summarizeSection(section) : null;
+    }
+    if (/experience|work|job|department|research|role/.test(normalized)) {
+      const section = chatSections.find(item => item.id === 'experience');
+      return section ? summarizeSection(section) : null;
+    }
+    if (/skill|skills|ability|strength/.test(normalized)) {
+      const section = chatSections.find(item => item.id === 'skills');
+      return section ? summarizeSection(section) : null;
+    }
+    if (/project|portfolio|toolkit/.test(normalized)) {
+      const section = chatSections.find(item => item.id === 'projects');
+      return section ? summarizeSection(section) : null;
+    }
+    if (/contact|email|reach|collaboration|opportunity/.test(normalized)) {
+      const section = chatSections.find(item => item.id === 'contact');
+      return section ? summarizeSection(section) : null;
+    }
+    if (/location|where|based/.test(normalized)) {
+      const hero = chatSections.find(item => item.id === 'hero');
+      return hero ? summarizeSection(hero) : null;
+    }
+
+    const matches = chatSections.filter(item => item.text.toLowerCase().includes(normalized));
+    if (matches.length > 0) {
+      return summarizeSection(matches[0]);
+    }
+    return null;
+  }
+
+  function handleChatSubmit(event) {
+    event.preventDefault();
+    const userText = chatInput.value.trim();
+    if (!userText) return;
+    appendChatMessage(userText, 'user');
+    chatInput.value = '';
+
+    const reply = getBestReply(userText) || 'I could not find a clear answer in the page details. Try asking about Akshay’s background, experience, skills, or contact information.';
+    setTimeout(() => appendChatMessage(reply, 'bot'), 250);
+  }
+
+  if (chatToggle && chatPanel && chatClose && chatForm && chatInput && chatMessages) {
+    chatToggle.addEventListener('click', () => {
+      chatPanel.classList.toggle('open');
+      if (chatPanel.classList.contains('open')) {
+        chatInput.focus();
+      }
+    });
+
+    chatClose.addEventListener('click', () => {
+      chatPanel.classList.remove('open');
+    });
+
+    chatForm.addEventListener('submit', handleChatSubmit);
+  }
+});
