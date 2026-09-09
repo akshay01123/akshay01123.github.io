@@ -650,6 +650,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
+  // Load GitHub activity progress from stats/course_progress.json
+  (function loadGitHubActivityProgress(){
+    const barEl = document.getElementById('github-progress-fill');
+    const labelEl = document.getElementById('github-progress-label');
+    if(!barEl || !labelEl) return;
+    fetch('/stats/course_progress.json').then(r=>{
+      if(!r.ok) throw new Error('no progress file');
+      return r.json();
+    }).then(data=>{
+      const pct = Number(data.completed) || 0;
+      const percentage = Math.max(0, Math.min(100, pct));
+      barEl.style.width = percentage + '%';
+      labelEl.textContent = 'Completion: ' + Math.round(percentage) + '%';
+    }).catch(()=>{
+      barEl.style.width = '31%';
+      labelEl.textContent = 'Completion: 31%';
+      // fallback: Prime AI course progress
+    });
+  })();
+
   // Project modal logic
   (function initProjectModal(){
     const modal = document.getElementById('project-modal');
