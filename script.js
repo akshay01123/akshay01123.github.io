@@ -251,8 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch (error) {
       console.error('GitHub stats fetch failed:', error);
-      if (streakLine) {
-        streakLine.textContent = 'Streak stats unavailable';
+      const statsLine = document.getElementById('github-stats-line');
+      if (statsLine) {
+        statsLine.textContent = 'GitHub stats temporarily unavailable (API rate limit or connection issue)';
       }
     }
   }
@@ -341,7 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
       await fetchGitHubLanguagesAndLatestRepo(reposData);
     } catch (error) {
       console.error('GitHub stats fetch failed:', error);
-      if (statsLine) statsLine.textContent = 'GitHub stats unavailable';
+      if (statsLine) {
+        const message = error.message.includes('rate') || error.status === 403 
+          ? 'GitHub stats temporarily unavailable (rate limited)' 
+          : 'GitHub stats unavailable (network or API issue). Try refreshing in a moment.';
+        statsLine.textContent = message;
+      }
     }
   }
 
@@ -393,8 +399,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (error) {
       console.error('GitHub languages/latest repo fetch failed:', error);
-      languagesContainer.textContent = 'Languages unavailable';
-      latestRepoContainer.textContent = 'Latest repo unavailable';
+      languagesContainer.innerHTML = '<span style="color: var(--text-muted); font-size: 0.95rem;">GitHub data loading — check back in a moment</span>';
+      latestRepoContainer.innerHTML = '<span style="color: var(--text-muted); font-size: 0.95rem;">Repos loading...</span>';
     }
   }
 

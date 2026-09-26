@@ -1,0 +1,25 @@
+{
+  "SUM": {
+    "code": 15847,
+    "comments": 892,
+    "blank": 2341
+  },
+  "languages": {
+    "JavaScript": {
+      "code": 8923,
+      "comments": 456,
+      "blank": 1203
+    },
+    "CSS": {
+      "code": 4156,
+      "comments": 287,
+      "blank": 798
+    },
+    "HTML": {
+      "code": 2768,
+      "comments": 149,
+      "blank": 340
+    }
+  },
+  "lastUpdated": "2026-09-26"
+}

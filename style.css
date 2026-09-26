@@ -830,10 +830,28 @@ a:hover {
   margin-bottom: 12px;
   border: 3px solid rgba(255,255,255,0.6);
   box-shadow: 0 12px 40px rgba(16,24,40,0.16);
+  background: linear-gradient(135deg, rgba(79,70,229,0.1), rgba(6,182,212,0.1));
+  opacity: 0;
+  animation: fadeIn 0.6s ease-in-out 0.2s forwards;
+}
+
+.profile-avatar[src]:not([src=""]) {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes skeletonPulse {
+  0%, 100% { background-color: rgba(99, 102, 241, 0.1); }
+  50% { background-color: rgba(99, 102, 241, 0.2); }
 }
 
 html[data-theme="dark"] .profile-avatar {
   border-color: rgba(255,255,255,0.06);
+  background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(34,211,238,0.1));
 }
 
 h2 {
