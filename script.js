@@ -22,6 +22,26 @@ document.addEventListener('DOMContentLoaded', () => {
   
   initTheme();
 
+  // Initialize back-to-top button
+  function initBackToTop() {
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (!backToTopBtn) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  initBackToTop();
+
   // Smooth scroll for internal anchors
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
@@ -1144,41 +1164,96 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getBestReply(query) {
-    const normalized = query.toLowerCase();
-    if (/(about me|tell me about|who are you|yourself|your background|your story|what do you do|what are you|about akshay|who is akshay)/.test(normalized)) {
-      const section = chatSections.find(item => item.id === 'about');
-      return section ? summarizeSection(section) : null;
+    const normalized = query.toLowerCase().trim();
+    
+    // Greetings
+    if (/(hello|hi|hey|greetings|namaste|よう|こんにちは)/.test(normalized)) {
+      return "Hey! 👋 I'm Akshay's portfolio assistant. Ask me about experience, skills, projects, or anything else on this page!";
     }
-    if (/about|background|profile|story|approach/.test(normalized)) {
+    
+    // About/Background
+    if (/(about me|tell me about|who are you|yourself|background|biography|profile|story|approach|introduce)/.test(normalized)) {
       const section = chatSections.find(item => item.id === 'about');
-      return section ? summarizeSection(section) : null;
+      return section ? summarizeSection(section) : "I'm a Country Manager & Engineer with 5+ years of experience in Japan and Asia. Ask more specifically!";
     }
-    if (/experience|work|job|department|research|role/.test(normalized)) {
+    
+    // Education/Qualifications
+    if (/(education|degree|iit|gandhinagar|m\.?tech|b\.?tech|qualification|studied|university|college|degree)/.test(normalized)) {
+      return "Akshay has an M.Tech in Materials Science from IIT Gandhinagar (CPI 8.38/10, 2018-20) and a B.Tech in Production Engineering from Uttarakhand Technical University (76.45%, 2014-18).";
+    }
+    
+    // Experience/Work
+    if (/(experience|work|job|career|kuken|industries|position|role|manufacturer|engineering)/.test(normalized)) {
       const section = chatSections.find(item => item.id === 'experience');
-      return section ? summarizeSection(section) : null;
+      return section ? summarizeSection(section) : "Akshay works at Kuken Industries with 5+ years in manufacturing, engineering, and international project management.";
     }
-    if (/skill|skills|ability|strength/.test(normalized)) {
+    
+    // Skills
+    if (/(skill|skills|ability|strength|expertise|proficient|good at|can you)/.test(normalized)) {
       const section = chatSections.find(item => item.id === 'skills');
-      return section ? summarizeSection(section) : null;
+      return section ? summarizeSection(section) : "Key skills: Project coordination, data analysis, AutoCAD, SolidWorks, and advanced Excel. Plus Python and AI/ML in progress!";
     }
-    if (/project|portfolio|toolkit/.test(normalized)) {
+    
+    // Languages
+    if (/(language|languages|speak|fluent|japanese|jlpt|hindi|नमस्ते|को)/.test(normalized)) {
+      return "Akshay is fluent in English (full professional), Japanese (JLPT N2 certified, professional-level), and Hindi (native proficiency). Perfect for international collaboration!";
+    }
+    
+    // Projects
+    if (/(project|projects|build|created|developed|github|portfolio|work)/.test(normalized)) {
       const section = chatSections.find(item => item.id === 'projects');
-      return section ? summarizeSection(section) : null;
+      return section ? summarizeSection(section) : "Akshay has worked on multiple projects including this portfolio, content generation tools, language learning apps, and more. Check the Projects section!";
     }
-    if (/contact|email|reach|collaboration|opportunity/.test(normalized)) {
+    
+    // GitHub/Technical
+    if (/(github|git|code|programming|python|javascript|repositories|repo|commits)/.test(normalized)) {
+      const section = chatSections.find(item => item.id === 'github');
+      return section ? summarizeSection(section) : "Check out Akshay's GitHub profile for active projects in Python, JavaScript, and AI/ML. Contributions tracked live!";
+    }
+    
+    // Contact/Collaboration
+    if (/(contact|email|reach|phone|connect|message|collaboration|opportunity|hire|ask|invitation)/.test(normalized)) {
       const section = chatSections.find(item => item.id === 'contact');
-      return section ? summarizeSection(section) : null;
+      return section ? summarizeSection(section) : "Want to collaborate? Email: akshay.srivastava543@gmail.com or call +81-90-1365-6148. LinkedIn: linkedin.com/in/akshay543";
     }
-    if (/location|where|based/.test(normalized)) {
-      const hero = chatSections.find(item => item.id === 'hero');
-      return hero ? summarizeSection(hero) : null;
+    
+    // Location
+    if (/(location|where|based|live|fukuoka|japan|country|city)/.test(normalized)) {
+      return "Akshay is based in Fukuoka, Japan, with experience working across Japan, Philippines, Malaysia, Korea, Thailand, India, and Sri Lanka.";
     }
-
+    
+    // Achievements/Awards
+    if (/(achievement|award|honor|recognition|accomplishment|successful|114%|45k|followers)/.test(normalized)) {
+      return "Notable achievements: JLPT N2 certification, 114% & 105% performance evaluations, 45K+ followers on Japaneasy101 (Instagram), and successful cross-border project coordination.";
+    }
+    
+    // Japaneasy101
+    if (/(japaneasy|instagram|followers|japanese lessons|content|social media)/.test(normalized)) {
+      return "Japaneasy101 is Akshay's Japanese learning community on Instagram with 45K+ followers. It's about sharing bite-sized, practical Japanese lessons for learners worldwide!";
+    }
+    
+    // Certifications
+    if (/(certification|certificate|certified|course|training|six sigma|market research|microstructural)/.test(normalized)) {
+      return "Certifications: JLPT N2, Six Sigma Foundations, Market Research Foundations, and specialized course on Microstructural Evolution During Friction Stir Processing.";
+    }
+    
+    // AI/ML/Learning
+    if (/(ai|machine learning|ml|deep learning|artificial intelligence|learning|python|pandas|course|progress)/.test(normalized)) {
+      return "Akshay is actively learning AI/ML! Currently 31% through a comprehensive AI course covering Python, Data Science, ML, DL, NLP, RAG, RL, and Deployment.";
+    }
+    
+    // Japaneasy/Instagram stats
+    if (/(45k|followers|japaneasy101)/.test(normalized)) {
+      return "Japaneasy101 has grown to 45K+ followers on Instagram! Follow @japaneasy101 for daily practical Japanese lessons.";
+    }
+    
+    // Fallback - try to find content
     const matches = chatSections.filter(item => item.text.toLowerCase().includes(normalized));
     if (matches.length > 0) {
       return summarizeSection(matches[0]);
     }
-    return null;
+    
+    return "I could not find a clear answer to that question. Try asking about Akshay's background, experience, skills, projects, languages, or contact information!";
   }
 
   function handleChatSubmit(event) {
