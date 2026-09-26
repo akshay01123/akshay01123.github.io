@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Akshay — Portfolio</title>
+  <script>
+    // Analytics config: set your domain to enable Plausible tracking
+    // Example: window.analyticsConfig = { provider: 'plausible', domain: 'akshay01123.github.io' }
+    window.analyticsConfig = window.analyticsConfig || { provider: 'plausible', domain: '' };
+  </script>
+  <style>html.disable-transitions *{transition:none!important}</style>
+  <script>
+  /* Prevent FOUC & set theme before render */
+  (function(){
+    document.documentElement.classList.add('disable-transitions');
+    var t = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = t === 'dark' || (!t && prefersDark) ? 'dark' : (t === 'light' ? 'light' : 'light');
+
+    if(theme === 'dark'){
+      document.documentElement.setAttribute('data-theme','dark');
+      // immediate inline fallback colors to avoid flash before CSS loads
+      document.documentElement.style.background = '#0f1419';
+      document.documentElement.style.color = '#f3f4f6';
+      if(document.body) { document.body.style.background = '#0f1419'; document.body.style.color = '#f3f4f6'; }
+    } else {
+      document.documentElement.setAttribute('data-theme','light');
+      document.documentElement.style.background = '#f5f7fa';
+      document.documentElement.style.color = '#1f2937';
+      if(document.body) { document.body.style.background = '#f5f7fa'; document.body.style.color = '#1f2937'; }
+    }
+
+    // Wait for full window load (ensures CSS is loaded) before removing fallbacks
+    window.addEventListener('load', function(){
+      // remove transition-block so stylesheet transitions behave normally
+      document.documentElement.classList.remove('disable-transitions');
+      // clear inline fallback styles after stylesheet applies to allow theme variables to take over
+      setTimeout(function(){
+        document.documentElement.style.background = '';
+        document.documentElement.style.color = '';
+        if(document.body) { document.body.style.background = ''; document.body.style.color = ''; }
+      }, 120);
+    });
+  })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="floating-dock" aria-label="Main navigation">
+    <a href="#hero" class="dock-item" title="Home" data-i18n-title="nav.home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+    </a>
+    <a href="#projects" class="dock-item" title="Projects" data-i18n-title="nav.projects">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9h18V5H3v4zm0 0v10a2 2 0 002 2h14a2 2 0 002-2V9"></path>
+        <circle cx="12" cy="15" r="2"></circle>
+      </svg>
+    </a>
+    <a href="#skills" class="dock-item" title="Skills" data-i18n-title="nav.skills">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 3v6m0 0v6m0-12l5.196-3v6m0 0l-5.196 3m5.196-3l-5.196-3m0 6l5.196 3"></path>
+        <circle cx="12" cy="12" r="10"></circle>
+      </svg>
+    </a>
+    <a href="#github" class="dock-item" title="GitHub" data-i18n-title="nav.github">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.263.82-.583 0-.288-.01-1.05-.015-2.06-3.338.725-4.042-1.608-4.042-1.608-.546-1.386-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.236 1.84 1.236 1.07 1.835 2.805 1.305 3.49.998.108-.776.418-1.305.762-1.605-2.665-.305-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.125-.305-.535-1.53.115-3.18 0 0 1.005-.322 3.3 1.23a11.51 11.51 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.655 1.65.245 2.875.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.62-5.475 5.92.43.37.81 1.1.81 2.22 0 1.605-.015 2.9-.015 3.295 0 .32.21.705.825.585C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+    </a>
+    <a href="#contact" class="dock-item" title="Contact" data-i18n-title="nav.contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22 6 12 13 2 6"></polyline>
+      </svg>
+    </a>
+    <div class="dock-language">
+      <label class="sr-only" for="dock-language-select">Language</label>
+      <select id="dock-language-select" class="dock-language-select" aria-label="Language selector">
+        <option value="en">EN</option>
+        <option value="ja">日本</option>
+        <option value="hi">हिं</option>
+      </select>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+      <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </nav>
+
+  <main>
+      <!-- Top shortcuts: quick links to main sections -->
+      <nav class="top-shortcuts" aria-label="Quick links to page sections">
+        <a href="#about">About</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#experience">Experience</a>
+        <a href="#languages">Languages</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#honors-awards">Honors</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#github">GitHub</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    <section id="hero" class="hero container">
+      <div class="hero-copy">
+        <img id="profile-avatar" class="profile-avatar" alt="Profile avatar" src="" aria-hidden="true">
+        <h1 data-i18n="hero.title">Hi, I'm Akshay</h1>
+        <div class="typewriter-wrapper">
+          <span id="typewriter-text"></span>
+          <span class="typewriter-cursor">|</span>
+        </div>
+        <p class="lead" data-i18n="hero.lead">Country Manager & Engineer with 5+ years of international experience in Japan and across Asia (Philippines, Malaysia, Korea, Thailand, India, Sri Lanka). Fluent in Japanese (JLPT N2), English, and Hindi. Building AI/Python skills to drive data-driven problem-solving.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#projects" data-i18n="hero.learn_more">See My Work →</a>
+          <a class="btn btn-outline" href="Resume.pdf" download="Akshay_Srivastava_Resume.pdf" aria-label="Download Resume PDF">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download CV
+          </a>
+        </div>
+        <!-- AI Snapshot removed; project modal added below -->
+      </div>
+      <aside class="hero-sidebar">
+        <div class="hero-card">
+          <strong data-i18n="hero.location_title">Location</strong>
+          <p data-i18n="hero.location_value">Fukuoka, Japan</p>
+        </div>
+        <div class="hero-card">
+          <strong data-i18n="hero.specialties_title">Specialties</strong>
+          <p data-i18n="hero.specialties_value">Country Manager · International Project Management · Engineering Coordination · Multilingual Communication</p>
+        </div>
+        <div class="hero-card hero-latest">
+          <strong>Latest</strong>
+          <p>Launched Japaneasy101 on Instagram for bite-sized Japanese lessons. Currently, having more than 45,000 followers — Follow <a href="https://instagram.com/japaneasy101" target="_blank" rel="noopener noreferrer">@japaneasy101</a> for updates.</p>
+        </div>
+        <div class="hero-card" id="github-hero-activity">
+          <strong>GitHub Activity</strong>
+          <div class="hero-activity-grid">
+            <div class="hero-activity-bar-item">
+              <p class="hero-activity-label">Last Week</p>
+              <div class="hero-progress-bar-wrapper">
+                <div class="hero-progress-bar" id="hero-progress-7d"></div>
+              </div>
+              <p class="hero-activity-stat" id="hero-progress-7d-stat">-</p>
+            </div>
+            <div class="hero-activity-bar-item">
+              <p class="hero-activity-label">Last Month</p>
+              <div class="hero-progress-bar-wrapper">
+                <div class="hero-progress-bar" id="hero-progress-30d"></div>
+              </div>
+              <p class="hero-activity-stat" id="hero-progress-30d-stat">-</p>
+            </div>
+            <div class="hero-activity-bar-item">
+              <p class="hero-activity-label">Last 3 Months</p>
+              <div class="hero-progress-bar-wrapper">
+                <div class="hero-progress-bar" id="hero-progress-3mo"></div>
+              </div>
+              <p class="hero-activity-stat" id="hero-progress-3mo-stat">-</p>
+            </div>
+            <div class="hero-activity-bar-item">
+              <p class="hero-activity-label">Last 6 Months</p>
+              <div class="hero-progress-bar-wrapper">
+                <div class="hero-progress-bar" id="hero-progress-6mo"></div>
+              </div>
+              <p class="hero-activity-stat" id="hero-progress-6mo-stat">-</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    
+
+    <section id="about" class="container section-section">
+      <h2 data-i18n="about.title">About</h2>
+      <p class="section-intro" data-i18n="about.intro">Engineer with 5+ years in engineering, manufacturing, and international project management across Japan and global markets. Fluent in Japanese (JLPT N2), English, and Hindi, with experience aligning stakeholders across engineering, production, and customers in the Philippines, Malaysia, Korea, Thailand, India, and Sri Lanka. Currently deepening skills in Python and AI/software engineering for data-driven and automation-focused problem-solving.
+      <div class="detail-grid">
+        <div>
+          <h3 data-i18n="about.background_title">Education</h3>
+          <p data-i18n="about.background_text">M.Tech in Materials Science and Engineering from IIT Gandhinagar (CPI 8.38/10, 2018-20). B.Tech in Production Engineering from Uttarakhand Technical University (76.45%, 2014-18). Strong foundation in data-driven experimentation and technical analysis.</p>
+        </div>
+        <div>
+          <h3 data-i18n="about.approach_title">Focus Areas</h3>
+          <p data-i18n="about.approach_text">Bridging technical and business functions through effective cross-cultural communication. Skilled in process improvement, project coordination, and data-driven decision support. Fluent in Japanese (JLPT N2), English, and Hindi with experience working in multicultural teams.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements" class="container section-section">
+      <h2>Achievements</h2>
+      <p class="section-intro">Highlights from my education, professional work, and Japanese language-learning community.</p>
+      <div class="achievements-grid">
+        <article class="achievement-card">
+          <span class="achievement-value">JLPT N2</span>
+          <h3>Japanese proficiency</h3>
+          <p>Professional Japanese communication for technical, business, and cross-cultural collaboration.</p>
+        </article>
+        <article class="achievement-card">
+          <span class="achievement-value">M.Tech</span>
+          <h3>IIT Gandhinagar</h3>
+          <p>Materials Science and Engineering postgraduate degree with a CPI of 8.38/10.</p>
+        </article>
+        <article class="achievement-card">
+          <span class="achievement-value">45K+</span>
+          <h3>Japaneasy101 followers</h3>
+          <p>Built an Instagram community that shares practical, bite-sized Japanese lessons.</p>
+        </article>
+        <article class="achievement-card">
+          <span class="achievement-value">114%</span>
+          <h3>Performance evaluation</h3>
+          <p>Recognized with 114% and 105% performance evaluations in consecutive terms.</p>
+        </article>
+        <article class="achievement-card">
+          <span class="achievement-value">Global</span>
+          <h3>Cross-border projects</h3>
+          <p>Coordinated overseas cooling tower projects across customers, engineering, and production teams.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="container section-section">
+      <h2 data-i18n="experience.title">Experience</h2>
+      <ol class="experience-timeline">
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">Country Manager</h3>
+              <span class="experience-duration">1 yr</span>
+            </div>
+            <p class="experience-company">Kuken Industries, Fukuoka, Japan</p>
+            <p class="experience-period">Oct 2025 – Present</p>
+            <ul class="experience-bullets">
+              <li>Contributed to Philippines market growth, achieving year-on-year results of 114% and 133% gross profit, while expanding customer engagement and project opportunities.</li>
+              <li>Owned end-to-end delivery of cooling tower, air terminal, and damper projects from initial technical consultation through quotation, engineering coordination, and final delivery.</li>
+              <li>Served as the primary point of contact across the Philippines, Malaysia, Korea, Thailand, India, and Sri Lanka, managing customer relationships, consultants, and contractors through the full project lifecycle.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">International Project Engineer</h3>
+              <span class="experience-duration">1 yr 6 mos</span>
+            </div>
+            <p class="experience-company">Kuken Industries, Fukuoka, Japan</p>
+            <p class="experience-period">Apr 2024 – Sep 2025</p>
+            <ul class="experience-bullets">
+              <li>Managed 20+ overseas cooling tower projects simultaneously, coordinating customers, engineering, and production teams across multiple time zones and languages.</li>
+              <li>Drove technical and operational decisions on active projects, resolving conflicts between customer requirements and manufacturing constraints to keep delivery on track.</li>
+              <li>Operated fluently across Japanese, English, and Hindi to align stakeholders spanning engineering, production, and customer-facing functions, often serving as the sole bridge between parties with no shared language.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">Production Engineer</h3>
+              <span class="experience-duration">2 yrs</span>
+            </div>
+            <p class="experience-company">Kuken Industries, Miyawaka, Japan</p>
+            <p class="experience-period">Apr 2022 – Mar 2024</p>
+            <ul class="experience-bullets">
+              <li>Delivered performance ratings of 114% and 105% in consecutive review cycles, reflecting consistent above-target execution on design and production work.</li>
+              <li>Designed components and drove manufacturing process improvements in close collaboration with factory and technical teams, working hands-on with production issues rather than from a desk.</li>
+              <li>Built cross-functional relationships between engineering and factory floor teams to close the gap between design intent and manufacturing reality.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">Technical Analyst (Remote)</h3>
+              <span class="experience-duration">11 mos</span>
+            </div>
+            <p class="experience-company">Contract, Ahmedabad, India</p>
+            <p class="experience-period">May 2021 – Mar 2022</p>
+            <ul class="experience-bullets">
+              <li>Conducted market and technical analysis to support engineering and business decision-making for international initiatives.</li>
+              <li>Improved data quality, documentation standards, and reporting processes to enhance downstream execution and collaboration.</li>
+              <li>Supported cross-border projects through structured analysis and coordination across technical and business functions.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">Postgraduate Researcher</h3>
+              <span class="experience-duration">9 mos</span>
+            </div>
+            <p class="experience-company">Advanced Materials Processing Research Group, IIT Gandhinagar</p>
+            <p class="experience-period">Aug 2020 – Apr 2021</p>
+            <ul class="experience-bullets">
+              <li>Designed and executed data-driven experiments, collecting datasets under controlled conditions.</li>
+              <li>Applied statistical analysis to evaluate material performance and process stability.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">Laboratory Teaching Assistant</h3>
+              <span class="experience-duration">7 mos</span>
+            </div>
+            <p class="experience-company">Indian Institute of Technology Gandhinagar</p>
+            <p class="experience-period">Jan 2020 – Jul 2020</p>
+            <ul class="experience-bullets">
+              <li>Demonstrated metallographic sample preparation and microscopy to undergraduates.</li>
+              <li>Techniques include sectioning, grinding, polishing, etching, and microscopic inspection.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">Summer Intern</h3>
+              <span class="experience-duration">1 month</span>
+            </div>
+            <p class="experience-company">Rail Vikas Nigam Limited, Varanasi, India</p>
+            <p class="experience-period">Jul 2017</p>
+            <ul class="experience-bullets">
+              <li>Conducted a comprehensive study of the manufacturing unit layout at Diesel Locomotive Works (DLW).</li>
+              <li>Analyzed methods aimed at enhancing productivity within the loco assembly shop, identifying inefficiencies and proposing solutions.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="experience-timeline-item">
+          <div class="experience-timeline-dot"></div>
+          <div class="experience-timeline-content">
+            <div class="experience-header">
+              <h3 class="experience-title">Summer Intern</h3>
+              <span class="experience-duration">2 mos</span>
+            </div>
+            <p class="experience-company">Indian Institute of Technology Bombay</p>
+            <p class="experience-period">Jun – Jul 2016</p>
+            <ul class="experience-bullets">
+              <li>Developed a solid understanding of Computer-Aided Design and Computer-Aided Manufacturing (CAD/CAM) technologies.</li>
+              <li>Contributed actively to research projects focusing on Rapid Prototyping and Manufacturing Technologies.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="languages" class="container section-section">
+      <h2>Languages</h2>
+      <div class="languages-grid">
+        <div class="language-card">
+          <h3>English</h3>
+          <p class="language-level">Full Professional</p>
+          <p class="language-description">Professional communication in business, technical, and international contexts.</p>
+        </div>
+        <div class="language-card">
+          <h3>Japanese</h3>
+          <p class="language-level">Full Professional (JLPT N2)</p>
+          <p class="language-description">Professional-level Japanese communication. JLPT N2 certified, N1 course completed. Fluent in technical and business communication across multiple time zones.</p>
+        </div>
+        <div class="language-card">
+          <h3>Hindi</h3>
+          <p class="language-level">Native or Bilingual</p>
+          <p class="language-description">Native proficiency in Hindi, enabling seamless communication in India and with Hindi-speaking stakeholders globally.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="container section-section">
+      <h2>Certifications</h2>
+      <div class="certifications-grid">
+        <article class="certification-card">
+          <h3>Online Japanese N1 Course</h3>
+          <p class="cert-issuer">Japanese Language Proficiency</p>
+          <p class="cert-description">Advanced Japanese language course completion, building on N2 certification.</p>
+        </article>
+        <article class="certification-card">
+          <h3>Online Japanese N2 Course</h3>
+          <p class="cert-issuer">JLPT N2 Certification</p>
+          <p class="cert-description">Professional-level Japanese language certification enabling fluent business and technical communication.</p>
+        </article>
+        <article class="certification-card">
+          <h3>Six Sigma Foundations</h3>
+          <p class="cert-issuer">Process Improvement & Quality Management</p>
+          <p class="cert-description">Foundation-level certification in Six Sigma methodology for process optimization and quality improvement.</p>
+        </article>
+        <article class="certification-card">
+          <h3>Market Research Foundations</h3>
+          <p class="cert-issuer">Market Intelligence & Analysis</p>
+          <p class="cert-description">Certification in market research methodologies for informed business decision-making.</p>
+        </article>
+        <article class="certification-card">
+          <h3>Course on Microstructural Evolution During Friction Stir Processing</h3>
+          <p class="cert-issuer">Advanced Materials Engineering</p>
+          <p class="cert-description">Specialized technical course on advanced manufacturing and materials processing techniques.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="honors-awards" class="container section-section">
+      <h2>Honors & Awards</h2>
+      <div class="honors-grid">
+        <article class="honor-card">
+          <span class="honor-badge">Academic</span>
+          <h3>Institute Scholarship for Meritorious Students</h3>
+          <p>Recognition for outstanding academic performance at IIT Gandhinagar.</p>
+        </article>
+        <article class="honor-card">
+          <span class="honor-badge">Research</span>
+          <h3>Best Poster</h3>
+          <p>Award for best research poster presentation during postgraduate studies.</p>
+        </article>
+        <article class="honor-card">
+          <span class="honor-badge">Academic</span>
+          <h3>Second Prize in Group Presentation</h3>
+          <p>Recognition for collaborative excellence in academic research presentation.</p>
+        </article>
+        <article class="honor-card">
+          <span class="honor-badge">Research</span>
+          <h3>Most Popular Poster</h3>
+          <p>Award for research poster that garnered the most interest and engagement from academic community.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="github" class="container section-section">
+      <h2>GitHub</h2>
+      <div class="github-card">
+        <div class="github-stats-section">
+          <div class="github-contrib-calendar-container">
+            <div id="github-contrib-calendar" class="github-contrib-calendar" role="img" aria-label="GitHub contributions calendar">
+              <!-- Visual contribution calendar rendered here -->
+            </div>
+          </div>
+          <p class="github-stats-line" id="github-stats-line">Loading GitHub stats...</p>
+        </div>
+
+        <div class="github-progress-bars-section">
+          <h3>Activity Completion by Period</h3>
+          <div class="progress-bars-container">
+            <div class="progress-bar-item">
+              <div class="progress-bar-header">
+                <span class="progress-bar-period">Week (7d)</span>
+                <span class="progress-bar-stat" id="progress-7d-stat">-</span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar progress-bar-7d" id="progress-7d"></div>
+              </div>
+            </div>
+            <div class="progress-bar-item">
+              <div class="progress-bar-header">
+                <span class="progress-bar-period">Month (30d)</span>
+                <span class="progress-bar-stat" id="progress-30d-stat">-</span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar progress-bar-30d" id="progress-30d"></div>
+              </div>
+            </div>
+            <div class="progress-bar-item">
+              <div class="progress-bar-header">
+                <span class="progress-bar-period">3 Months</span>
+                <span class="progress-bar-stat" id="progress-3mo-stat">-</span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar progress-bar-3mo" id="progress-3mo"></div>
+              </div>
+            </div>
+            <div class="progress-bar-item">
+              <div class="progress-bar-header">
+                <span class="progress-bar-period">6 Months</span>
+                <span class="progress-bar-stat" id="progress-6m-stat">-</span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar progress-bar-6m" id="progress-6m"></div>
+              </div>
+            </div>
+            <div class="progress-bar-item">
+              <div class="progress-bar-header">
+                <span class="progress-bar-period">Year (365d)</span>
+                <span class="progress-bar-stat" id="progress-1y-stat">-</span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar progress-bar-1y" id="progress-1y"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="github-languages-section">
+          <h3>Languages</h3>
+          <div class="github-languages" id="github-languages">Loading languages...</div>
+        </div>
+
+        <div class="github-graph-card">
+          <div class="github-graph-wrapper">
+            <!-- Rendered contribution grid (hoverable dots with tooltip) -->
+            <div id="github-contrib-grid" class="github-contrib-grid" role="img" aria-label="GitHub contributions grid" aria-hidden="true"></div>
+            <div id="contrib-tooltip" class="contrib-tooltip" aria-hidden="true"></div>
+          </div>
+        </div>
+        <p class="github-note">Contributions (select a range: 7d, 30d, 3 months, 6 months). Fetched live from GitHub.</p>
+      </div>
+    </section>
+
+    <section id="skills" class="container section-section">
+      <h2 data-i18n="skills.title">Skills</h2>
+      <div class="skill-cards-grid">
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 6 20 3 2 21h3"></polyline>
+              <path d="M16 5l-3.5 3.5"></path>
+              <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Front-End Development</h3>
+          <p class="skill-card-description">UI/UX design and responsive web development</p>
+          <div class="skill-badges">
+            <span class="badge">User Interface Design</span>
+            <span class="badge">CSS</span>
+            <span class="badge">HTML</span>
+            <span class="badge">Responsive Design</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Project Management</h3>
+          <p class="skill-card-description">Planning, coordination, and process optimization</p>
+          <div class="skill-badges">
+            <span class="badge">Project Management</span>
+            <span class="badge">Engineering Coordination</span>
+            <span class="badge">Process Improvement</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 19l9 2-9-18-9 18 9-2m0-8l6.838-2.026a9 9 0 00-13.676 0L12 11z"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Engineering & Design</h3>
+          <p class="skill-card-description">CAD design and technical proposal support</p>
+          <div class="skill-badges">
+            <span class="badge">AutoCAD</span>
+            <span class="badge">SolidWorks</span>
+            <span class="badge">Technical Proposal Support</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"></path>
+              <polyline points="13 2 13 9 20 9"></polyline>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Business & Sales</h3>
+          <p class="skill-card-description">International sales and data analysis capabilities</p>
+          <div class="skill-badges">
+            <span class="badge">International Sales</span>
+            <span class="badge">Advanced Excel</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills-in-progress" class="container section-section">
+      <h2>Skills in Progress</h2>
+      <div class="skill-cards-grid">
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Programming</h3>
+          <p class="skill-card-description">Core programming languages and fundamentals</p>
+          <div class="skill-badges">
+            <span class="badge">Python</span>
+            <span class="badge">SQL</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="2" x2="12" y2="22"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Data Analysis</h3>
+          <p class="skill-card-description">Data manipulation, visualization, and EDA</p>
+          <div class="skill-badges">
+            <span class="badge">Pandas</span>
+            <span class="badge">NumPy</span>
+            <span class="badge">Matplotlib</span>
+            <span class="badge">EDA</span>
+            <span class="badge">Data Cleaning</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="1"></circle>
+              <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m2.12 2.12l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m2.12-2.12l4.24-4.24"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Machine Learning</h3>
+          <p class="skill-card-description">Supervised and unsupervised learning algorithms</p>
+          <div class="skill-badges">
+            <span class="badge">Scikit-learn</span>
+            <span class="badge">Regression</span>
+            <span class="badge">Classification</span>
+            <span class="badge">Clustering</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6-3 6 3v5.5a5.5 5.5 0 0 1-5.5 5.5H11.5A5.5 5.5 0 0 1 6 14.5V9z"></path>
+              <polyline points="6 6 12 2 18 6"></polyline>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Deep Learning</h3>
+          <p class="skill-card-description">Neural networks and advanced architectures</p>
+          <div class="skill-badges">
+            <span class="badge">Neural Networks</span>
+            <span class="badge">CNN Fundamentals</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <div class="skill-card-icon-container">
+            <svg class="skill-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 1 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title">Tools</h3>
+          <p class="skill-card-description">Development and collaboration platforms</p>
+          <div class="skill-badges">
+            <span class="badge">Git</span>
+            <span class="badge">GitHub</span>
+            <span class="badge">Jupyter Notebook</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="course" class="container section-section">
+      <h2>AI Course Progress</h2>
+      <div class="course-grid">
+        <div class="course-progress">
+          <p class="course-summary">Current course completion</p>
+          <div class="progress-wrapper compact" aria-hidden="true">
+            <div class="progress-track">
+              <div id="course-progress-bar" class="progress-fill" style="width:31%"></div>
+            </div>
+            <div id="course-progress-text" class="progress-text">31%</div>
+          </div>
+          <p class="course-note">Core course topics: Python, Data Foundations, Databases, Visualization, Math, ML, DL, NLP, RAG, RL, Deployment.</p>
+        </div>
+        <div class="course-modules">
+          <h3>Modules</h3>
+          <ol>
+            <li>Python & Core Programming</li>
+            <li>Data Foundations</li>
+            <li>Data Collection & Databases</li>
+            <li>Data Visualization</li>
+            <li>Mathematics for AI</li>
+            <li>Machine Learning Fundamentals</li>
+            <li>Advanced Machine Learning</li>
+            <li>Software Engineering for AI</li>
+            <li>Deep Learning</li>
+            <li>NLP & Generative AI</li>
+            <li>RAG, OpenAI & Agentic AI</li>
+            <li>Reinforcement Learning</li>
+            <li>AI Engineering & Deployment</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="container section-section">
+      <h2 data-i18n="projects.title">Projects</h2>
+      <div class="project-filters">
+        <button class="project-filter-btn active" data-filter="all">All</button>
+        <button class="project-filter-btn" data-filter="computer-vision">Computer Vision</button>
+        <button class="project-filter-btn" data-filter="nlp">NLP</button>
+        <button class="project-filter-btn" data-filter="generative">Generative</button>
+        <button class="project-filter-btn" data-filter="data">Data</button>
+        <button class="project-filter-btn" data-filter="tools">Tools</button>
+        <button class="project-filter-btn" data-filter="web">Web</button>
+        <button class="project-filter-btn" data-filter="research">Research</button>
+      </div>
+      <div class="projects-bento-grid">
+        <article class="bento-card bento-card-featured compact" data-category="web">
+          <div class="bento-card-header">
+            <h3 data-i18n="projects.card1.title">Portfolio Refresh</h3>
+            <span class="bento-badge featured">Featured</span>
+          </div>
+          <p class="bento-card-description" data-i18n="projects.card1.text">A clear, responsive personal website to share my story, skills, and contact information. Built with modern glassmorphism design, dark/light theme support, and interactive components.</p>
+          <div class="bento-card-footer">
+            <span class="bento-tech">React-less</span>
+            <span class="bento-tech">CSS3</span>
+            <span class="bento-tech">JavaScript</span>
+          </div>
+          <a href="https://akshay01123.github.io/Portfolio-akshay01123.github.io/" target="_blank" rel="noopener noreferrer" class="bento-link">Visit Website</a>
+        </article>
+        
+        <article class="bento-card bento-card-tall compact" data-category="nlp tools generative">
+          <div class="bento-card-header">
+            <h3>Content Generator</h3>
+            <span class="bento-badge">In Progress</span>
+          </div>
+          <p class="bento-card-description">AI-driven content generation and automated posting to X (Twitter). Planning to build a pipeline that creates, schedules, and posts content using machine learning APIs.</p>
+          <div class="bento-card-footer">
+            <span class="bento-tech">Python</span>
+            <span class="bento-tech">AI/ML</span>
+            <span class="bento-tech">APIs</span>
+          </div>
+          <a class="bento-link" href="https://github.com/akshay01123/ai-content-automation" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </article>
+
+        <article class="bento-card bento-card-wide compact" data-category="web">
+          <div class="bento-card-header">
+            <h3>Japaneasy101 - Language Learning</h3>
+            <span class="bento-badge">Active</span>
+          </div>
+          <p class="bento-card-description">Launched a successful Instagram account with 45,000+ followers providing bite-sized Japanese lessons. Focused on simple, practical language content for learners worldwide.</p>
+          <div class="bento-card-stats">
+            <div class="stat"><span class="stat-value">45K+</span><span class="stat-label">Followers</span></div>
+            <div class="stat"><span class="stat-value">Daily</span><span class="stat-label">Posts</span></div>
+          </div>
+          <a href="https://instagram.com/japaneasy101" target="_blank" rel="noopener noreferrer" class="bento-link">Follow on Instagram</a>
+        </article>
+        
+        <article class="bento-card compact" data-category="computer-vision generative">
+          <div class="bento-card-header">
+            <h3>AI Forensic Sketch Assistant</h3>
+            <span class="bento-badge">In Progress</span>
+          </div>
+          <p class="bento-card-description">An AI-assisted forensic sketch generator that uses voice input and AI image generation to let witnesses describe and refine suspect sketches in real time. Features planned: speech-to-text, prompt generation, real-time refinement, and session export.</p>
+          <div class="bento-card-footer">
+            <span class="bento-tech">TypeScript</span>
+            <span class="bento-tech">React</span>
+            <span class="bento-tech">FastAPI</span>
+            <span class="bento-tech">OpenAI</span>
+          </div>
+          <a href="https://github.com/akshay01123/forensic-sketch-ai" target="_blank" rel="noopener noreferrer" class="bento-link">View on GitHub</a>
+        </article>
+        
+        <article class="bento-card compact" data-category="nlp tools data" data-thumb="https://opengraph.githubassets.com/1/akshay01123/jobmtach-ai">
+          <div class="bento-thumb" aria-hidden="true"></div>
+          <div class="bento-card-header">
+            <h3>JobMatch AI</h3>
+            <span class="bento-badge">New</span>
+          </div>
+          <p class="bento-card-description">JobMatch AI: a foundation for analyzing how well a resume matches a job description. Planned features: resume parsing, skill extraction, embeddings & semantic matching, and LLM-based recommendations.</p>
+          <div class="bento-card-footer">
+            <span class="bento-tech">JavaScript</span>
+            <span class="bento-tech">Python</span>
+            <span class="bento-tech">FastAPI</span>
+            <span class="bento-tech">Uvicorn</span>
+          </div>
+          <a href="https://github.com/akshay01123/jobmatch-ai" target="_blank" rel="noopener noreferrer" class="bento-link">View on GitHub</a>
+        </article>
+
+        <article class="bento-card compact" data-category="web tools">
+          <div class="bento-card-header">
+            <h3>Digital Contact Card</h3>
+            <span class="bento-badge">Live</span>
+          </div>
+          <p class="bento-card-description">A lightweight, accessible digital business card with interactive skill descriptions, sharing support, and downloadable PNG export.</p>
+          <div class="bento-card-footer">
+            <span class="bento-tech">HTML</span>
+            <span class="bento-tech">CSS</span>
+            <span class="bento-tech">JavaScript</span>
+            <span class="bento-tech">Web Share API</span>
+          </div>
+          <a href="https://akshay01123.github.io/contact-card/" target="_blank" rel="noopener noreferrer" class="bento-link">Visit Website</a>
+        </article>
+
+        <article class="bento-card compact" data-category="web data">
+          <div class="bento-card-header">
+            <h3>Follower Dashboard</h3>
+            <span class="bento-badge">Live</span>
+          </div>
+          <p class="bento-card-description">A custom dashboard for tracking Instagram and LinkedIn audiences in one simple view.</p>
+          <div class="bento-card-footer">
+            <span class="bento-tech">HTML</span>
+            <span class="bento-tech">CSS</span>
+            <span class="bento-tech">JavaScript</span>
+          </div>
+          <a href="https://github.com/akshay01123/follower-dashboard" target="_blank" rel="noopener noreferrer" class="bento-link">View on GitHub</a>
+        </article>
+
+        <article class="bento-card compact" data-category="web">
+          <div class="bento-card-header">
+            <h3>Flappy Bird</h3>
+            <span class="bento-badge">Live</span>
+          </div>
+          <p class="bento-card-description">A browser-based Flappy Bird game built with JavaScript and the HTML canvas element.</p>
+          <div class="bento-card-footer">
+            <span class="bento-tech">JavaScript</span>
+            <span class="bento-tech">HTML Canvas</span>
+            <span class="bento-tech">CSS</span>
+          </div>
+          <a href="https://akshay01123.github.io/flappy-bird/" target="_blank" rel="noopener noreferrer" class="bento-link">Play Game</a>
+        </article>
+      </div>
+    </section>
+
+
+
+    <!-- Project Modal (inserted near end of body) -->
+    <div id="project-modal" class="modal" aria-hidden="true">
+      <div class="modal-overlay" data-action="close"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" data-action="close" aria-label="Close">×</button>
+        <h3 id="modal-title">Project Title</h3>
+        <p id="modal-desc">Project description</p>
+        <div id="modal-techs" class="modal-techs"></div>
+        <div class="modal-actions">
+          <a id="modal-github" class="btn" href="#" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          <a id="modal-demo" class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer">View Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="contact" class="container section-section">
+      <h2 data-i18n="contact.title">Get in Touch</h2>
+      <p data-i18n="contact.line1">Let's connect! Reach out for collaborations, projects, or international opportunities.</p>
+      
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Direct Contact</h3>
+          <div class="contact-list">
+            <a href="mailto:akshay.srivastava543@gmail.com" class="contact-item">
+              <span class="contact-label">Email</span>
+              <span class="contact-value">akshay.srivastava543@gmail.com</span>
+            </a>
+            <a href="tel:+819013656148" class="contact-item">
+              <span class="contact-label">Phone</span>
+              <span class="contact-value">+81-90-1365-6148</span>
+            </a>
+            <a href="https://www.linkedin.com/in/akshay543" target="_blank" rel="noopener noreferrer" class="contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-value">linkedin.com/in/akshay543</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="contact-block">
+          <h3>Follow</h3>
+          <div class="social-links">
+            <a href="https://linkedin.com/in/akshay543/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn" aria-label="Connect on LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.452 20.452h-3.707v-5.569c0-1.328-.027-3.036-1.849-3.036-1.85 0-2.133 1.445-2.133 2.939v5.666H9.31V9h3.559v1.561h.05c.496-.939 1.704-1.93 3.507-1.93 3.75 0 4.444 2.469 4.444 5.676v6.145zM5.337 7.433a2.152 2.152 0 1 1 0-4.303 2.152 2.152 0 0 1 0 4.303zm1.854 13.019H3.483V9h3.708v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.732v20.535C0 23.225.792 24 1.771 24h20.451C23.2 24 24 23.225 24 22.268V1.732C24 .774 23.2 0 22.225 0z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://github.com/akshay01123" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub" aria-label="Visit GitHub profile">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.263.82-.583 0-.288-.01-1.05-.015-2.06-3.338.725-4.042-1.608-4.042-1.608-.546-1.386-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.236 1.84 1.236 1.07 1.835 2.805 1.305 3.49.998.108-.776.418-1.305.762-1.605-2.665-.305-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.125-.305-.535-1.53.115-3.18 0 0 1.005-.322 3.3 1.23a11.51 11.51 0 0 1 3-.405c1.02.005 2.045.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.655 1.65.245 2.875.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.62-5.475 5.92.43.37.81 1.1.81 2.22 0 1.605-.015 2.9-.015 3.295 0 .32.21.705.825.585C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a href="https://instagram.com/japaneasy101" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram" aria-label="Follow on Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.16c3.2 0 3.584.012 4.85.07 1.17.054 1.98.243 2.44.413a4.92 4.92 0 0 1 1.78 1.02 4.93 4.93 0 0 1 1.02 1.78c.17.46.357 1.27.413 2.44.058 1.27.069 1.65.069 4.85s-.011 3.584-.069 4.85c-.056 1.17-.243 1.98-.413 2.44a4.927 4.927 0 0 1-1.02 1.78 4.927 4.927 0 0 1-1.78 1.02c-.46.17-1.27.357-2.44.413-1.27.058-1.65.069-4.85.069s-3.584-.011-4.85-.069c-1.17-.056-1.98-.243-2.44-.413a4.93 4.93 0 0 1-1.78-1.02 4.93 4.93 0 0 1-1.02-1.78c-.17-.46-.357-1.27-.413-2.44C2.172 15.584 2.16 15.2 2.16 12s.012-3.584.07-4.85c.054-1.17.243-1.98.413-2.44a4.92 4.92 0 0 1 1.02-1.78 4.92 4.92 0 0 1 1.78-1.02c.46-.17 1.27-.357 2.44-.413C8.416 2.172 8.8 2.16 12 2.16zm0 1.8c-3.163 0-3.543.011-4.79.069-1.006.046-1.55.216-1.91.363a3.14 3.14 0 0 0-1.136.737 3.142 3.142 0 0 0-.737 1.136c-.147.36-.317.904-.363 1.91-.058 1.247-.069 1.627-.069 4.79s.011 3.543.069 4.79c.046 1.006.216 1.55.363 1.91.17.43.406.818.737 1.136.318.331.706.567 1.136.737.36.147.904.317 1.91.363 1.247.058 1.627.069 4.79.069s3.543-.011 4.79-.069c1.006-.046 1.55-.216 1.91-.363a3.14 3.14 0 0 0 1.136-.737 3.142 3.142 0 0 0 .737-1.136c.147-.36.317-.904.363-1.91.058-1.247.069-1.627.069-4.79s-.011-3.543-.069-4.79c-.046-1.006-.216-1.55-.363-1.91a3.14 3.14 0 0 0-.737-1.136 3.14 3.14 0 0 0-1.136-.737c-.36-.147-.904-.317-1.91-.363-1.247-.058-1.627-.069-4.79-.069z"/>
+                <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 1.8a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm5.25-.95a1.05 1.05 0 1 1-2.1 0 1.05 1.05 0 0 1 2.1 0z"/>
+              </svg>
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Snake game removed -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p data-i18n="footer.copyright">© 2026 Akshay</p>
+      <p class="visitor-counter">👁️ <span id="visitor-count">Loading...</span> visitors</p>
+    </div>
+  </footer>
+
+  <div class="chat-widget" id="chat-widget">
+    <button class="chat-toggle" id="chat-toggle" aria-label="Open chat">
+      <span>Ask Akshay</span>
+      <span class="chat-badge" id="chat-badge">?</span>
+    </button>
+    <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Akshay chat bot">
+      <div class="chat-header">
+        <div>
+          <strong>Ask Akshay</strong>
+          <p>Ask about experience, skills, or projects.</p>
+        </div>
+        <button class="chat-close" id="chat-close" aria-label="Close chat">×</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-message bot">
+          <div class="chat-message-text">Hi! I can answer questions about Akshay using this page. Try asking about work, skills, or contact details.</div>
+        </div>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <input id="chat-input" class="chat-input" type="text" placeholder="Ask a question..." aria-label="Chat question" autocomplete="off">
+        <button type="submit" class="chat-submit">Send</button>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
